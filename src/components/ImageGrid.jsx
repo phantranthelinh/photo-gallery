@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import useFireStore from "./../hook/useFireStore";
 
 const ImageGrid = ({ setSelectedImg }) => {
   const { docs } = useFireStore("images");
-  const constraintsRef = useRef(null);
+
   return (
     <div className="img-grid">
       {docs?.map((doc) => (
@@ -13,12 +13,9 @@ const ImageGrid = ({ setSelectedImg }) => {
           key={doc.createAt}
           layout
           whileHover={{ opacity: 1 }}
-          ref={constraintsRef}
           onClick={() => setSelectedImg(doc.url)}
         >
           <motion.img
-            drag
-            dragConstraints={constraintsRef}
             src={doc.url}
             alt="uploaded pic"
             initial={{ opacity: 0 }}
